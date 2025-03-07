@@ -121,7 +121,10 @@ def update(frame):
     ax.axhline(y=0, color="r", linestyle="--", label="Cero (ms)")
 
     # 🔹 **Eliminar márgenes laterales**
-    ax.set_xlim(auto=True)  # Ajustar automáticamente el eje X
+    #ax.set_xlim(auto=True)  # Ajustar automáticamente el eje X
+    if len(times) > 1:
+        ax.set_xlim(times[0], times[-1])  # Ajusta el eje X desde el primer hasta el último punto
+
     ax.set_ylim(min(latencies) - 1, max(latencies) + 1)  # Ajustar límites del eje Y
 
     # 🔹 **Ajustar el espacio de la gráfica**
