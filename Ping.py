@@ -146,9 +146,9 @@ def update(frame):
         # Sumar tiempo total de fallas
         tiempo_total_fallas = len(failures) * intervalo  # Multiplica la cantidad de fallas por el intervalo
 
-        mensaje_falla = f" | Última Caída: {ultima_falla} | Tiempo Total de Caídas: {tiempo_total_fallas:.1f} segundos"
+        mensaje_falla = f" | Última Falla: {ultima_falla} | Tiempo Total de Fallas: {tiempo_total_fallas:.1f} segundos"
     else:
-        mensaje_falla = " | Sin caídas registradas"
+        mensaje_falla = " | Sin Fallas registradas"
 
 
     ax.set_title(color="red",fontsize=20, label=(f"Ping a {HOST} | Intervalo:{intervalo} | Archivo_Log:{nombre_log} | Inicio Prueba: {horaini}"))
