@@ -24,6 +24,7 @@ print(" |  " +Blue  +"                                                "+ Grey +"
 print(" "+ Red + "_______________________________________________________________")
 
 horaini = timestamp = datetime.now().strftime("%Y-%m-%d-%H:%M:%S")  # Solo la hora
+horainiping = datetime.now()
 
 # Dirección IP o dominio a hacer ping
 HOST = input("\nIngresar Direccion IP o Dominio Y Presione Enter: ")  # Cambia por el dominio o IP deseado
@@ -127,12 +128,31 @@ def update(frame):
     plt.subplots_adjust(left=0.05, right=0.95, top=0.90, bottom=0.15)  # Reduce márgenes generales
 
     # 🔹 **Optimizar etiquetas en el eje X**
-    plt.xticks(rotation=90, ha="right")  # Gira y alinea etiquetas del eje X
+    if len(times) > 15:  # Asegurar que haya suficientes elementos en la lista
+        tick_positions = list(range(0, len(times), 15))  # Tomar cada 5 elementos
+        tick_labels = [times[i] for i in tick_positions]  # Obtener los valores correspondientes
 
+        ax.set_xticks(tick_positions)  # Definir las posiciones en el eje X
+        ax.set_xticklabels(tick_labels, rotation=90, ha="right")  # Asignar etiquetas y girarlas
+    #plt.xticks(rotation=90, ha="right")  # Gira y alinea etiquetas del eje X
+    #ax.set_xticklabels(list(times)[::5], rotation=90, ha="right")
+    horaping = datetime.now()
     #plt.xticks(rotation=90)  # Rota etiquetas para mejor visibilidad
+    tiempo_transcurrido = (horaping - horainiping).total_seconds() / 60  # Convertir a minutos
 
-    ax.set_title(color="red",fontsize=20, label=(f"Ping a {HOST} Intervalo:{intervalo} Archivo:{nombre_log} Inicio: {horaini}"))
-    ax.set_xlabel("Tiempo")
+    if failures:  # Verificar si hay fallas registradas
+        ultima_falla = max(failures.keys())  # Última hora de falla registrada
+
+        # Sumar tiempo total de fallas
+        tiempo_total_fallas = len(failures) * intervalo  # Multiplica la cantidad de fallas por el intervalo
+
+        mensaje_falla = f" | Última Caída: {ultima_falla} | Tiempo Total de Caídas: {tiempo_total_fallas:.1f} segundos"
+    else:
+        mensaje_falla = " | Sin caídas registradas"
+
+
+    ax.set_title(color="red",fontsize=20, label=(f"Ping a {HOST} | Intervalo:{intervalo} | Archivo_Log:{nombre_log} | Inicio Prueba: {horaini}"))
+    ax.set_xlabel(f"Tiempo Transcurrido {tiempo_transcurrido:.1f} Minutos | Fallas Totales: {len(failures)}{mensaje_falla}",color="red",fontsize=20)
     ax.set_ylabel("Latencia (ms)")
     ax.legend()
     ax.grid(True)
