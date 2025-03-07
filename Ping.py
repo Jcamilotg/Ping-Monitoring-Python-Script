@@ -32,8 +32,10 @@ nombre_log = input("\nIngrese Nombre del Archivo Log y Presione Enter:   ")
 # Configuración del log
 LOG_FILE = f"{nombre_log}.csv"
 
+fallalist = []
+
 # Máximo de puntos en la gráfica
-MAX_POINTS = 260000  # Limita la memoria usada
+MAX_POINTS = 86400  # Limita la memoria usada
 times = deque(maxlen=MAX_POINTS)
 latencies = deque(maxlen=MAX_POINTS)
 failures = {}  # Diccionario para almacenar las fallas con fecha y hora
@@ -111,8 +113,9 @@ def update(frame):
     # Dibujar todas las fallas registradas con puntos rojos
     for fail_time, fail_value in failures.items():
         if fail_time in times:  # Solo dibujar las fallas dentro del rango visible
-            ax.scatter(fail_time, fail_value, color="red", s=100, label=f"Falla{timestamp}")
-            ax.text(fail_time, fail_value, f"Falla{timestamp}", fontsize=10, color="red", ha="right", va="bottom", rotation=90)
+            fallalist.append(fail_time)
+            ax.scatter(fail_time, fail_value, color="red", s=100, label=f"Falla{fail_time}")
+            ax.text(fail_time, fail_value, f"Falla{fail_time}", fontsize=10, color="red", ha="right", va="bottom", rotation=90)
 
     ax.axhline(y=0, color="r", linestyle="--", label="Cero (ms)")
 
