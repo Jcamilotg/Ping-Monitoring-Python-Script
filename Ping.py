@@ -106,6 +106,7 @@ def update(frame):
         failures[timestamp] = 0  # Registrar la falla en el diccionario
 
     ax.clear()
+    ax.axhline(y=0, color="r", linestyle="--", label="Cero (ms)")
 
     # Dibujar la línea del ping en azul
     ax.plot(times, latencies, marker="o", linestyle="-", color="b", label="Ping (ms)")
@@ -125,14 +126,16 @@ def update(frame):
     if len(times) > 1:
         ax.set_xlim(times[0], times[-1])  # Ajusta el eje X desde el primer hasta el último punto
 
-    ax.set_ylim(min(latencies) - 1, max(latencies) + 1)  # Ajustar límites del eje Y
+    #ax.set_ylim(min(latencies) - 1, max(latencies) + 1)  # Ajustar límites del eje Y
+    ax.set_ylim(0, max(latencies) + 1)  # Mínimo en 0, máximo un poco más del valor más alto
+
 
     # 🔹 **Ajustar el espacio de la gráfica**
     plt.subplots_adjust(left=0.05, right=0.95, top=0.90, bottom=0.15)  # Reduce márgenes generales
 
     # 🔹 **Optimizar etiquetas en el eje X**
-    if len(times) > 15:  # Asegurar que haya suficientes elementos en la lista
-        tick_positions = list(range(0, len(times), 15))  # Tomar cada 5 elementos
+    if len(times) > 20:  # Asegurar que haya suficientes elementos en la lista
+        tick_positions = list(range(0, len(times), 20))  # Tomar cada 5 elementos
         tick_labels = [times[i] for i in tick_positions]  # Obtener los valores correspondientes
 
         ax.set_xticks(tick_positions)  # Definir las posiciones en el eje X
