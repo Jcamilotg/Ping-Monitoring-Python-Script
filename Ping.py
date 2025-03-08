@@ -36,7 +36,7 @@ LOG_FILE = f"{nombre_log}.csv"
 fallalist = []
 
 # Máximo de puntos en la gráfica
-MAX_POINTS = 86400  # Limita la memoria usada
+MAX_POINTS = 43200  # Limita la memoria usada
 times = deque(maxlen=MAX_POINTS)
 latencies = deque(maxlen=MAX_POINTS)
 failures = {}  # Diccionario para almacenar las fallas con fecha y hora
