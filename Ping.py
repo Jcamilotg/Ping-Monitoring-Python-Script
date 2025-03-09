@@ -119,7 +119,7 @@ def update(frame):
             ax.scatter(fail_time, fail_value, color="red", s=100, label=f"Falla{fail_time}")
             ax.text(fail_time, fail_value, f"Falla{fail_time}", fontsize=10, color="red", ha="right", va="bottom", rotation=90)
 
-    ax.axhline(y=0, color="r", linestyle="--", label="Cero (ms)")
+    #ax.axhline(y=0, color="r", linestyle="--", label="Cero (ms)")
 
     # 🔹 **Eliminar márgenes laterales**
     #ax.set_xlim(auto=True)  # Ajustar automáticamente el eje X
