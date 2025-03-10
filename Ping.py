@@ -163,6 +163,9 @@ def update(frame):
     ax.legend()
     ax.grid(True)
 
+    plt.pause(1)  # Espera para asegurarse de que la imagen se haya renderizado
+    plt.savefig(f"{nombre_log}.jpg", dpi=75, bbox_inches="tight")  # Guarda la imagen
+    #print(f"\n📸 Gráfico guardado como {nombre_log}.jpg")
 
 # Configuración de la gráfica
 #fig = plt.figure(figsize=(15, 7), dpi=100)
@@ -170,5 +173,6 @@ def update(frame):
 fig, ax = plt.subplots(figsize=(15, 7), dpi=75)
 
 ani = animation.FuncAnimation(fig, update, interval=(1000*intervalo), cache_frame_data=False)  # Cada 10 seg
-
 plt.show()
+
+#plt.close()  # Elimina el gráfico
