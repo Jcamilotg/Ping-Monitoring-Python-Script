@@ -27,9 +27,9 @@ horaini = timestamp = datetime.now().strftime("%Y-%m-%d-%H:%M:%S")  # Solo la ho
 horainiping = datetime.now()
 
 # Dirección IP o dominio a hacer ping
-HOST = input("\nIngresar Direccion IP o Dominio Y Presione Enter: ")  # Cambia por el dominio o IP deseado
-intervalo = float(input("Ingrese el Intervalo del Ping en Segundos:   "))
-nombre_log = input("\nIngrese Nombre del Archivo Log y Presione Enter:   ")
+HOST = input("\nIngresar Direccion IP o Dominio Y Presione Enter: \t")  # Cambia por el dominio o IP deseado
+intervalo = float(input("Ingrese el Intervalo del Ping en Segundos: \t"))
+nombre_log = input("\nIngrese Nombre del Archivo Log y Presione Enter: \t")
 # Configuración del log
 LOG_FILE = f"{nombre_log}.csv"
 
